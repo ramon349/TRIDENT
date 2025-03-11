@@ -1,0 +1,3 @@
+__pycache__/
+trident.egg-info/
+trident/segmentation_models/hest-tissue-seg/

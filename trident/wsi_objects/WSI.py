@@ -463,7 +463,7 @@ class OpenSlideWSI:
         device = segmentation_model.device
         eval_transforms = segmentation_model.eval_transforms
         dataset = WSIPatcherDataset(patcher, eval_transforms)
-        dataloader = DataLoader(dataset, batch_size=batch_size, num_workers=get_num_workers(batch_size), pin_memory=True)
+        dataloader = DataLoader(dataset, batch_size=batch_size, num_workers=get_num_workers(batch_size), pin_memory=False,multiprocessing_context='fork')
 
         mpp_reduction_factor = self.mpp / destination_mpp
         width, height = self.get_dimensions()
@@ -825,7 +825,7 @@ class OpenSlideWSI:
             pil=True
         )
         dataset = WSIPatcherDataset(patcher, patch_transforms)
-        dataloader = DataLoader(dataset, batch_size=batch_limit, num_workers=get_num_workers(batch_limit), pin_memory=True)
+        dataloader = DataLoader(dataset, batch_size=batch_limit, num_workers=get_num_workers(batch_limit), pin_memory=True,multiprocessing_context='fork')
 
         features = []
         for imgs, _ in dataloader:
